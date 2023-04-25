@@ -20,8 +20,8 @@
 const MAX_ELEMNTS = 10; // переменная характерезующая маскимальную длинну массива
 const typeBuildings = ['palace', 'flat', 'house', 'bungalow', 'hotel'];// типы зданий
 const times = ['12:00', '13:00', '14:00'];//Время посещения и проверок
-const features = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditione'];
-const links = [
+const availability = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditione'];
+const linksPhptos = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg'
@@ -33,3 +33,24 @@ function getRandomInteger(a, b) {
   return Math.floor(Math.random() * (upper - lower + 1) + lower);
 }
 
+function getAvatars(index) {
+  return `img/avatars/user${index + 1}.png`;
+}
+
+function getOffers (building, time, feature, link,){
+  return {
+    title: 'Сдам в аренду жилье',
+    address: 12,
+    price: getRandomInteger(15000, 50000),
+    type: building[getRandomInteger(0, building.length - 1)],
+    rooms: getRandomInteger(1, 8),
+    guests: getRandomInteger(1, 10),
+    checkin: time[getRandomInteger(0, time.length - 1)],
+    checkout: time[getRandomInteger(0, time.length - 1)],
+    features: feature.slice(getRandomInteger(0, feature.length - 2), getRandomInteger(1, feature.length - 1)),
+    description:12,
+    photos: link.slice(getRandomInteger(0, link.length - 2), getRandomInteger(1, link.length - 1))
+  }
+}
+const l = getOffers(typeBuildings, times, availability, linksPhptos);
+console.log(l)
