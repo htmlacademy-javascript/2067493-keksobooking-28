@@ -83,4 +83,3 @@ function getAdvertisement (index) {
 //Создаем массив объявлений
 const advertisement = Array.from({length: MAX_ELEMNTS}, (item, i) => getAdvertisement (i));
 
-console.log(advertisement);
