@@ -20,7 +20,7 @@ function randomElements (element) {
 
 //Функция для создания массива со случайной длинной
 function randomArray (array) {
-  return array.slice(getRandomInteger(0, array.length - 2), getRandomInteger(1, array.length - 1));
+  return array.slice(0, getRandomInteger(0, array.length - 1));
 }
 export{getRandomNumberFloat, getRandomInteger, randomElements, randomArray};
 
