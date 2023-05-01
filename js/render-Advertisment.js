@@ -21,7 +21,7 @@ const checkType = (obj) => {
 };
 
 //Функция добавления эелементов на страницу
-const renderAdvertisment = ({ offer, avatars }) => {
+const renderAdvertisment = ({ offer, author}) => {
   //Клонируем шаблон
   const advertismentTemplate = pattern.cloneNode(true);
 
@@ -46,12 +46,18 @@ const renderAdvertisment = ({ offer, avatars }) => {
   advertismentTemplate.querySelector('.popup__description').textContent = offer.description;
 
   //Проверяем особенности здания и удалем из списка те которых нету в массиве объявления
-  featuresList.forEach((featureItem) => {
-    const idNecessary = offer.features.some((feature) => featureItem.classList.contains(`popup__feature--${feature}`));
-    if (!idNecessary) {
+  if(Object.hasOwn(offer, 'features')){
+    featuresList.forEach((featureItem) => {
+      const idNecessary = offer.features.some((feature) => featureItem.classList.contains(`popup__feature--${feature}`));
+      if (!idNecessary) {
+        featureItem.remove();
+      }
+    });
+  } else {
+    featuresList.forEach((featureItem) => {
       featureItem.remove();
-    }
-  });
+    });
+  }
 
   //Добавляем фотографии в шаблон
   offer.photos.forEach((photo) => {
@@ -61,7 +67,7 @@ const renderAdvertisment = ({ offer, avatars }) => {
   });
 
   //Добавлем фотографию аватарки автора
-  advertismentTemplate.querySelector('.popup__avatar').src = avatars;
+  advertismentTemplate.querySelector('.popup__avatar').src = author.avatar;
   return advertismentTemplate;
 };
 

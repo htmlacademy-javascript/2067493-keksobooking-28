@@ -1,7 +1,14 @@
-import {advertisement} from './createAdvertisment.js';
-import {renderAdvertisment, container } from './rendering.js';
-
+// import {advertisement} from './renderAdvertisment.js';
+import { renderAdvertisment, container } from './render-Advertisment.js';
+import { getData } from './api.js';
 //Добавлем элементы первого значения массива advertisement на страницу
-container.append(renderAdvertisment(advertisement[0]));
 
+
+getData()
+  .then((data) => {
+    console.log(data);
+    renderAdvertisment(data[0]);
+    container.append(renderAdvertisment(data[0]));
+  })
+  .catch();
 
