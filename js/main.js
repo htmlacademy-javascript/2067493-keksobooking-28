@@ -1,14 +1,15 @@
-// import {advertisement} from './renderAdvertisment.js';
+import {adForm, filtersForm} from './constains.js';
 import { renderAdvertisment, container } from './render-Advertisment.js';
 import { getData } from './api.js';
-//Добавлем элементы первого значения массива advertisement на страницу
+import {getInactiveState} from './inactive-state.js';
 
+getInactiveState(adForm);
+getInactiveState(filtersForm);
 
 getData()
   .then((data) => {
-    console.log(data);
-    renderAdvertisment(data[0]);
-    container.append(renderAdvertisment(data[0]));
+    renderAdvertisment(data[3]);
+    container.append(renderAdvertisment(data[3]));
   })
   .catch();
 
