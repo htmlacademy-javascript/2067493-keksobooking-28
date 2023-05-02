@@ -4,7 +4,7 @@ import { getData } from './api.js';
 import {getInactiveState} from './inactive-state.js';
 
 getInactiveState(adForm);
-getInactiveState(filtersForm);
+
 
 getData()
   .then((data) => {
