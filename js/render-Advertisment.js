@@ -59,12 +59,14 @@ const renderAdvertisment = ({ offer, author}) => {
     });
   }
 
-  //Добавляем фотографии в шаблон
-  offer.photos.forEach((photo) => {
-    const cratePhoto = templatePhotoElement.cloneNode(true);
-    cratePhoto.src = photo;
-    templatePhotos.append(cratePhoto);
-  });
+  //Добавляем фотографии в шаблон в случае если они есть
+  if(Object.hasOwn(offer, 'photos')){
+    offer.photos.forEach((photo) => {
+      const cratePhoto = templatePhotoElement.cloneNode(true);
+      cratePhoto.src = photo;
+      templatePhotos.append(cratePhoto);
+    });
+  }
 
   //Добавлем фотографию аватарки автора
   advertismentTemplate.querySelector('.popup__avatar').src = author.avatar;
