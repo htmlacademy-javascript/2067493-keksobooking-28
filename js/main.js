@@ -8,17 +8,9 @@ getInactiveState(adForm);
 getInactiveState(filtersForm);
 //Загружаем карту
 loadMap()
-  //При успешной загрузки карты перевести форму заполенения в активное состояние
-  // .then(() => {
-  //   getActiveState(adForm);
-  // })
   //Если карта загрузилась, то загружаем данные
   .then(() => {
     getData()
-      //ПРи успешной загрузки данных перевсти филтры в активное состояние
-      // .then(() => {
-      //   getActiveState(filtersForm);
-      // })
       //Если данные загрузились, создаем маркеры на основе этих данных
       .then((data) => {
         console.log(data);
