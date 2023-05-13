@@ -22,7 +22,7 @@ const createMarkerAdvertisment = (data) => {
   });
 };
 //Формула загрузки карты: Созадаем обещаение(Promise)
-const loadMap = () => new Promise((resolve, reject) => {
+const loadMap = () => new Promise((resolve) => {
   //По событию загрузки карты выводим сообщение в консоль после задаем карте координаты и масштаб
   map.on('load', () => {
     console.log('Карта инициализированная');
@@ -47,4 +47,4 @@ const loadMap = () => new Promise((resolve, reject) => {
   });
 });
 
-export { loadMap, createMarkerAdvertisment, map };
+export { loadMap, createMarkerAdvertisment, };
