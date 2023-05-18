@@ -1,5 +1,7 @@
 //Сылка получения данных с сервера
 const GET_URL = 'https://28.javascript.pages.academy/keksobooking/data';
+//Ссылка отправки данных
+const POST_URL = 'https://28.javascript.pages.academy/keksobooking';
 //Находим форму для заполнения и отправки данных на сервера
 const adForm = document.querySelector('.ad-form');
 //Находим фильтры
@@ -26,4 +28,4 @@ const ICON_MARKER_ADVERTISMENT = L.icon({
   iconAnchor: [20, 40]
 });
 //Экспортируем данные
-export {GET_URL, adForm, filtersForm, TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER };
+export {GET_URL, adForm, filtersForm, TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER, POST_URL };

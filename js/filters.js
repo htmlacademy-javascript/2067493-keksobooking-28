@@ -25,7 +25,9 @@ const getPriceHousing = (filter, data) => {
 };
 
 const getFeatures = (filter, data) => model[filter]
-  .reduce((acc, filterItem) => {acc.filter((accItem) => accItem.offer.features?.includes(filterItem));}, data);
+  .reduce((acc, filterItem) => {
+    acc.filter((accItem) => accItem.offer.features?.includes(filterItem));
+  }, data);
 
 const getFilteredPoints = (filter, data) => {
   switch (filter) {
