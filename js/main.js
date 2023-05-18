@@ -1,7 +1,9 @@
 import { getData } from './api.js';
-import { loadMap, createMarkerAdvertisment } from './rendering-map.js';
+import { loadMap,} from './rendering-map.js';
 import { getInactiveState, getActiveState } from './page-status.js';
 import { adForm, filtersForm } from './constains.js';
+import { setForm } from './form.js';
+import { setFilters} from './filters.js';
 //Задаем странице не активное состояние
 getInactiveState(adForm);
 getInactiveState(filtersForm);
@@ -11,14 +13,12 @@ loadMap()
   .then(() => getActiveState(adForm))
   //Если карта загрузилась, то загружаем данные
   .then(() => {
-    console.log('Активное состояние формы');
-  })
-  .then(() => {
     getData()
       //Если данные загрузились, создаем маркеры на основе этих данных
       .then((data) => {
         console.log(data);
-        createMarkerAdvertisment(data);
+        setFilters(data);
+        setForm();
         console.log('Данные загруженны');
       })
       .then(() => {
@@ -34,3 +34,5 @@ loadMap()
   .catch(() => {
     console.log('Карта не загружена');
   });
+
+

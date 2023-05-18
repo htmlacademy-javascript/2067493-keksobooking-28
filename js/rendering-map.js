@@ -3,22 +3,26 @@ import { TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICO
 import { renderAdvertisment } from './render-Advertisment.js';
 //Создаем карты в необходимом блоке
 const map = L.map('map-canvas');
+const markerGroup = L.layerGroup().addTo(map);
+const createMarker = (obj) => {
+  const marker = L.marker({
+    lat: obj.location.lat,
+    lng: obj.location.lng
+  },
+  //Задаем внешний вид маркеру
+  {
+    icon: ICON_MARKER_ADVERTISMENT
+  });
+
+  //Добавляем маркер на карту и добавляем ему соответсвующий попап с информацией
+  marker.addTo(markerGroup)
+    .bindPopup(renderAdvertisment(obj));
+};
 //формула создания маркера похожих объявлений
 const createMarkerAdvertisment = (data) => {
   //Перебираем данные и для каждого созадаем свой маркер на карте
   data.forEach((dataItem) => {
-    //Создаем маркер и размещаем его в соответсвующих координатах
-    const marker = L.marker({
-      lat: dataItem.location.lat,
-      lng: dataItem.location.lng
-    },
-    //Задаем внешний вид маркеру
-    {
-      icon: ICON_MARKER_ADVERTISMENT
-    });
-    //Добавляем маркер на карту и добавляем ему соответсвующий попап с информацией
-    marker.addTo(map)
-      .bindPopup(renderAdvertisment(dataItem));
+    createMarker(dataItem);
   });
 };
 //Формула загрузки карты: Созадаем обещаение(Promise)
@@ -47,4 +51,4 @@ const loadMap = () => new Promise((resolve) => {
   });
 });
 
-export { loadMap, createMarkerAdvertisment, };
+export { loadMap, createMarkerAdvertisment, markerGroup };
