@@ -7,6 +7,7 @@ const adForm = document.querySelector('.ad-form');
 //Находим фильтры
 const filtersForm = document.querySelector('.map__filters');
 //Настройкий лефлета по умолчанию
+const MAX_FILTERS = 10;
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 const COPYRIGHT = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 //Настройки карты по умолчанию: увелечение и центральные координаты соответсвенно
@@ -28,4 +29,4 @@ const ICON_MARKER_ADVERTISMENT = L.icon({
   iconAnchor: [20, 40]
 });
 //Экспортируем данные
-export {GET_URL, adForm, filtersForm, TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER, POST_URL };
+export {GET_URL, adForm, filtersForm, TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER, POST_URL, MAX_FILTERS };
