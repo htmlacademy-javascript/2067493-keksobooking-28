@@ -1,5 +1,5 @@
 import { createMarkerAdvertisment, markerGroup } from './rendering-map.js';
-import{ MAX_FILTERS} from './constains.js';
+import { MAX_FILTERS } from './constains.js';
 const formFilters = document.querySelector('.map__filters');
 const points = [];
 const model = {
@@ -25,7 +25,7 @@ const getPriceHousing = (filter, data) => {
   }
 };
 
-const getFeatures = (filter, data) => model[filter].reduce((acc, filterItem) => acc.filter((accItem) => accItem.offer.features?.includes(filterItem)) , data);
+const getFeatures = (filter, data) => model[filter].reduce((acc, filterItem) => acc.filter((accItem) => accItem.offer.features?.includes(filterItem)), data);
 
 const getFilteredPoints = (filter, data) => {
   switch (filter) {
