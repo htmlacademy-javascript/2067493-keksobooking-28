@@ -1,5 +1,4 @@
-import { slider } from "./slider.js";
-import { markerUser } from "./rendering-map.js";
+import { markerUser } from './rendering-map.js';
 const adForm = document.querySelector('.ad-form');
 const titleForm = adForm.querySelector('#title');
 const priceForm = adForm.querySelector('#price');
@@ -58,11 +57,10 @@ addresForm.value = 'lat 35.6895, lng 139.692';
 //Получение координаты адреса по перемещению маркера
 markerUser.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
-  console.log(coordinates);
   addresForm.value = `lat ${coordinates.lat.toFixed(5)}, lng ${coordinates.lng.toFixed(5)}`;
 });
 
-//Валидация времени заезда и выезда
+//Синхронизация времени заезда и выезда
 const timeinForm = adForm.querySelector('#timein');
 const timeoutForm = adForm.querySelector('#timeout');
 //Синхронизация времение выезда при измение времени заезда
@@ -70,6 +68,23 @@ timeinForm.addEventListener('change', () => timeoutForm.value = timeinForm.value
 //Синхронизация времени заезда при изменение времени выезда
 timeoutForm.addEventListener('change', () => timeinForm.value = timeoutForm.value);
 
+//Синхронизация количества комнат м количеством мест
+const roomForm = adForm.querySelector('#room_number');
+const capacityForm = adForm.querySelector('#capacity');
+const capacityFormElement = capacityForm.querySelectorAll('option');
+capacityForm.value = 1;
+roomForm.addEventListener('change', () => {
+  capacityFormElement.forEach((element) => {
+    if(roomForm.value == 100 && element.value == 0) {
+      return element.disabled = false;
+    } else if(roomForm.value + 0 < element.value || element.value == 0){
+      return element.disabled = true;
+    }
+    return element.disabled = false;
+  });
+});
+
+capacityForm.value = 1;
 
 //Проверка валидации формы при отпраки
 adForm.addEventListener('submit', (evt) => {
