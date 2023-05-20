@@ -2,7 +2,7 @@ import { getData } from './api.js';
 import { loadMap,} from './rendering-map.js';
 import { getInactiveState, getActiveState } from './page-status.js';
 import { adForm, filtersForm } from './constains.js';
-import { setForm } from './form.js';
+// import { setForm } from './form.js';
 import { setFilters} from './filters.js';
 //Задаем странице не активное состояние
 getInactiveState(adForm);
@@ -18,7 +18,7 @@ loadMap()
       .then((data) => {
         console.log(data);
         setFilters(data);
-        setForm();
+        // setForm();
         console.log('Данные загруженны');
       })
       .then(() => {
