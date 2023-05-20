@@ -1,8 +1,8 @@
 import { slider } from "./slider.js";
 import { markerUser } from "./rendering-map.js";
 const adForm = document.querySelector('.ad-form');
-const titleAdForm = adForm.querySelector('#title');
-const priceAdForm = adForm.querySelector('#price');
+const titleForm = adForm.querySelector('#title');
+const priceForm = adForm.querySelector('#price');
 const pristine = new Pristine (adForm, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
@@ -12,15 +12,16 @@ const pristine = new Pristine (adForm, {
   errorTextClass: 'ad-form__element--error'
 },);
 
-const validateTitleAdForm = (value) => value.length >= 30 && value.length <= 100;
-
+//Валидация заголовка
+const validateTitleForm = (value) => value.length >= 30 && value.length <= 100;
 pristine.addValidator(
-  titleAdForm,
-  validateTitleAdForm,
+  titleForm,
+  validateTitleForm,
   'От 30 до 100 символов'
 );
-const typeAdForm = adForm.querySelector('#type');
 
+//Валидация цены
+const typeForm = adForm.querySelector('#type');
 const minPrice = {
   'bungalow': 0,
   'flat': 1000,
@@ -28,38 +29,49 @@ const minPrice = {
   'house': 5000,
   'palace': 10000,
 };
-
-const validatePriceAdForm = (value) => value >= minPrice[typeAdForm.value] && value <= 100000;
-
-const messageValidatePriceAdForm = (value) => {
-  if(value < minPrice[typeAdForm.value]){
-    return `Минимум ${minPrice[typeAdForm.value]}`;
+//Проверка валидности цены
+const validatePriceForm = (value) => value >= minPrice[typeForm.value] && value <= 100000;
+//Сообщение если цена не валидна
+const messageValidatePriceForm = (value) => {
+  if(value < minPrice[typeForm.value]){
+    return `Минимум ${minPrice[typeForm.value]}`;
   } else if (value > 100000) {
     return 'Максимум 100000';
   }
 };
-
+//Проверка валидности цены
 pristine.addValidator(
-  priceAdForm,
-  validatePriceAdForm,
-  messageValidatePriceAdForm
+  priceForm,
+  validatePriceForm,
+  messageValidatePriceForm
 );
-
-typeAdForm.addEventListener('change', () => {
-  priceAdForm.placeholder = `${minPrice[typeAdForm.value]}`;
-  pristine.validate(priceAdForm);
+//Измение типа жилья
+typeForm.addEventListener('change', () => {
+  priceForm.placeholder = `${minPrice[typeForm.value]}`;
+  pristine.validate(priceForm);
 });
 
+//Валидация адреса
 const addresForm = adForm.querySelector('#address');
 addresForm.readOnly = true;
-addresForm.placeholder = 'lat 35.6895, lng 139.692';
-
+addresForm.value = 'lat 35.6895, lng 139.692';
+//Получение координаты адреса по перемещению маркера
 markerUser.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
   console.log(coordinates);
-  addresForm.value = `lat ${coordinates.lat}, lng ${coordinates.lng}`;
+  addresForm.value = `lat ${coordinates.lat.toFixed(5)}, lng ${coordinates.lng.toFixed(5)}`;
 });
 
+//Валидация времени заезда и выезда
+const timeinForm = adForm.querySelector('#timein');
+const timeoutForm = adForm.querySelector('#timeout');
+//Синхронизация времение выезда при измение времени заезда
+timeinForm.addEventListener('change', () => timeoutForm.value = timeinForm.value);
+//Синхронизация времени заезда при изменение времени выезда
+timeoutForm.addEventListener('change', () => timeinForm.value = timeoutForm.value);
+
+
+//Проверка валидации формы при отпраки
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const isValid = pristine.validate();
