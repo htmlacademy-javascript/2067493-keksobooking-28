@@ -1,4 +1,5 @@
 import { slider } from "./slider.js";
+import { markerUser } from "./rendering-map.js";
 const adForm = document.querySelector('.ad-form');
 const titleAdForm = adForm.querySelector('#title');
 const priceAdForm = adForm.querySelector('#price');
@@ -47,6 +48,16 @@ pristine.addValidator(
 typeAdForm.addEventListener('change', () => {
   priceAdForm.placeholder = `${minPrice[typeAdForm.value]}`;
   pristine.validate(priceAdForm);
+});
+
+const addresForm = adForm.querySelector('#address');
+addresForm.readOnly = true;
+addresForm.placeholder = 'lat 35.6895, lng 139.692';
+
+markerUser.on('moveend', (evt) => {
+  const coordinates = evt.target.getLatLng();
+  console.log(coordinates);
+  addresForm.value = `lat ${coordinates.lat}, lng ${coordinates.lng}`;
 });
 
 adForm.addEventListener('submit', (evt) => {

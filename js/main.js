@@ -1,5 +1,5 @@
 import { getData } from './api.js';
-import { loadMap,} from './rendering-map.js';
+import { loadMap, markerUser, map} from './rendering-map.js';
 import { getInactiveState, getActiveState } from './page-status.js';
 import { adForm, filtersForm } from './constains.js';
 // import { setForm } from './form.js';
@@ -11,6 +11,7 @@ getInactiveState(filtersForm);
 console.log('Неактивное состояние страницы');
 loadMap()
   .then(() => getActiveState(adForm))
+  .then(() => markerUser.addTo(map))
   //Если карта загрузилась, то загружаем данные
   .then(() => {
     getData()

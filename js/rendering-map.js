@@ -37,18 +37,12 @@ const loadMap = () => new Promise((resolve) => {
     attribution: COPYRIGHT
   }).addTo(map);
   //Создаем специальный маркер на карте.
-  const markerUser = L.marker(
-    CITY_CENTER,
-    {
-      draggable: true,
-      icon: ICON_MARKER_USER
-    });
-  //Добавляем специальный маркер на карту
-  markerUser.addTo(map);
-  //Создаем событие вывести координаты специального маркера в консоль при его конечном положение
-  markerUser.on('moveend', (evt) => {
-    console.log(evt.target.getLatLng());
-  });
 });
+const markerUser = L.marker(
+  CITY_CENTER,
+  {
+    draggable: true,
+    icon: ICON_MARKER_USER
+  });
 
-export { loadMap, createMarkerAdvertisment, markerGroup };
+export { loadMap, createMarkerAdvertisment, markerGroup, markerUser, map};

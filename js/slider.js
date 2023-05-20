@@ -41,5 +41,4 @@ typeAdForm.addEventListener('change', () => {
   });
 });
 
-
 export { slider };
