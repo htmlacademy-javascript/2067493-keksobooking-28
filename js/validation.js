@@ -1,8 +1,7 @@
+import { slider } from "./slider.js";
 const adForm = document.querySelector('.ad-form');
-console.log(adForm);
 const titleAdForm = adForm.querySelector('#title');
 const priceAdForm = adForm.querySelector('#price');
-console.log(titleAdForm);
 const pristine = new Pristine (adForm, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
