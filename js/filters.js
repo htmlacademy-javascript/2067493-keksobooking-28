@@ -1,5 +1,6 @@
 import { createMarkerAdvertisment, markerGroup } from './rendering-map.js';
 import { MAX_FILTERS } from './constains.js';
+import { debounce } from './utils.js';
 const formFilters = document.querySelector('.map__filters');
 const points = [];
 const model = {
@@ -56,12 +57,12 @@ const changeModel = (filter, value) => {
   console.log(model);
 };
 
-formFilters.addEventListener('change', (evt) => {
+formFilters.addEventListener('change', debounce((evt) => {
   markerGroup.clearLayers();
   changeModel(evt.target.name, evt.target.value);
   console.log(filterPoints());
   createMarkerAdvertisment(filterPoints().slice(0, MAX_FILTERS));
-});
+}, 500));
 
 const setFilters = (data) => {
   points.push(...data.slice());
