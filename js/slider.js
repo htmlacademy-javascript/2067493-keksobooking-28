@@ -37,7 +37,6 @@ typeAdForm.addEventListener('change', () => {
       min: minPrice[typeAdForm.value],
       max: 100000
     },
-    start: 30000
   });
 });
 

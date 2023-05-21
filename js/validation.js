@@ -2,7 +2,7 @@ import { markerUser } from './rendering-map.js';
 const adForm = document.querySelector('.ad-form');
 const titleForm = adForm.querySelector('#title');
 const priceForm = adForm.querySelector('#price');
-const pristine = new Pristine (adForm, {
+const pristine = new Pristine(adForm, {
   classTo: 'ad-form__element',
   errorClass: 'ad-form__element--invalid',
   successClass: 'ad-form__element--valid',
@@ -11,7 +11,7 @@ const pristine = new Pristine (adForm, {
   errorTextClass: 'ad-form__element--error'
 },);
 
-//Валидация заголовка
+//------------Валидация заголовка------------------
 const validateTitleForm = (value) => value.length >= 30 && value.length <= 100;
 pristine.addValidator(
   titleForm,
@@ -19,7 +19,7 @@ pristine.addValidator(
   'От 30 до 100 символов'
 );
 
-//Валидация цены
+//------------Валидация цены---------------------
 const typeForm = adForm.querySelector('#type');
 const minPrice = {
   'bungalow': 0,
@@ -28,11 +28,11 @@ const minPrice = {
   'house': 5000,
   'palace': 10000,
 };
-//Проверка валидности цены
+//Функция проверки валидности цены
 const validatePriceForm = (value) => value >= minPrice[typeForm.value] && value <= 100000;
 //Сообщение если цена не валидна
 const messageValidatePriceForm = (value) => {
-  if(value < minPrice[typeForm.value]){
+  if (value < minPrice[typeForm.value]) {
     return `Минимум ${minPrice[typeForm.value]}`;
   } else if (value > 100000) {
     return 'Максимум 100000';
@@ -44,23 +44,23 @@ pristine.addValidator(
   validatePriceForm,
   messageValidatePriceForm
 );
-//Измение типа жилья
+//Проверка валидности цены при измение типа жилья
 typeForm.addEventListener('change', () => {
   priceForm.placeholder = `${minPrice[typeForm.value]}`;
   pristine.validate(priceForm);
 });
 
-//Валидация адреса
+//---------------Валидация адреса---------------------
 const addresForm = adForm.querySelector('#address');
 addresForm.readOnly = true;
-addresForm.value = 'lat 35.6895, lng 139.692';
+addresForm.value = '35.6895, 139.692';
 //Получение координаты адреса по перемещению маркера
 markerUser.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
-  addresForm.value = `lat ${coordinates.lat.toFixed(5)}, lng ${coordinates.lng.toFixed(5)}`;
+  addresForm.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
 });
 
-//Синхронизация времени заезда и выезда
+//-------Синхронизация времени заезда и выезда----------
 const timeinForm = adForm.querySelector('#timein');
 const timeoutForm = adForm.querySelector('#timeout');
 //Синхронизация времение выезда при измение времени заезда
@@ -68,23 +68,46 @@ timeinForm.addEventListener('change', () => timeoutForm.value = timeinForm.value
 //Синхронизация времени заезда при изменение времени выезда
 timeoutForm.addEventListener('change', () => timeinForm.value = timeoutForm.value);
 
-//Синхронизация количества комнат м количеством мест
+//------------Валидация количества гостей--------------
 const roomForm = adForm.querySelector('#room_number');
 const capacityForm = adForm.querySelector('#capacity');
-const capacityFormElement = capacityForm.querySelectorAll('option');
-capacityForm.value = 1;
-roomForm.addEventListener('change', () => {
-  capacityFormElement.forEach((element) => {
-    if(roomForm.value == 100 && element.value == 0) {
-      return element.disabled = false;
-    } else if(roomForm.value + 0 < element.value || element.value == 0){
-      return element.disabled = true;
-    }
-    return element.disabled = false;
-  });
+const quantityRoom = {
+  '100': ['0'],
+  '1': ['1'],
+  '2': ['1', '2'],
+  '3': ['1', '2', '3']
+};
+//Функция проверки валидности количества гостей
+const capapasityOption = () => quantityRoom[roomForm.value].includes(capacityForm.value);
+//Проверка валидности количества гостей
+pristine.addValidator(
+  capacityForm,
+  capapasityOption,
+  'Не подходит количетсво гостей'
+);
+//Проверка валидности количества гостей при измение количетсва комнат
+roomForm.addEventListener('change', () => pristine.validate(capacityForm));
+
+//------------------Фотография аватарки-------------------------------
+const avatarForm = adForm.querySelector('#avatar');
+const imageAvatarPreview = adForm.querySelector('.ad-form-header__preview img');
+avatarForm.addEventListener('change', () => {
+  const image = avatarForm.files[0];
+  imageAvatarPreview.src = URL.createObjectURL(image);
 });
 
-capacityForm.value = 1;
+//------------------Фотография помещения-------------------------------
+const roomPhotoForm = adForm.querySelector('#images');
+const roomPreview = adForm.querySelector('.ad-form__photo');
+const imageRoomPreview = document.createElement('img');
+imageRoomPreview.width = '70';
+imageRoomPreview.height = '70';
+imageRoomPreview.src = 'img/muffin-red.svg';
+roomPreview.append(imageRoomPreview);
+roomPhotoForm.addEventListener('change', () => {
+  const imageRoom = roomPhotoForm.files[0];
+  imageRoomPreview.src = URL.createObjectURL(imageRoom);
+});
 
 //Проверка валидации формы при отпраки
 adForm.addEventListener('submit', (evt) => {
