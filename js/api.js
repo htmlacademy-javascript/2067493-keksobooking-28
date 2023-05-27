@@ -1,4 +1,6 @@
+
 import { GET_URL, POST_URL } from './constains.js';
+
 const getData = () =>
   fetch(GET_URL)
     .then((response) => {
@@ -10,6 +12,7 @@ const getData = () =>
     });
 
 
+
 const postData = (body) =>
   fetch(POST_URL, {
     method: 'post',
@@ -17,3 +20,4 @@ const postData = (body) =>
   });
 
 export { getData, postData };
+

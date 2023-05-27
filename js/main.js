@@ -1,3 +1,4 @@
+
 import { getData } from './api.js';
 import { loadMap, markerUser, map} from './rendering-map.js';
 import { getInactiveState, getActiveState } from './page-status.js';
@@ -36,5 +37,6 @@ loadMap()
   .catch(() => {
     console.log('Карта не загружена');
   });
+
 
 
