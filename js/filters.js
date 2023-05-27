@@ -9,9 +9,9 @@ const model = {
 
 const getTypeHousing = (filter, data) => model[filter] !== 'any' ? data.slice().filter((dataItem) => dataItem.offer.type === model[filter]) : data.slice();
 
-const getHousingRooms = (filter, data) => model[filter] !== 'any' ? data.slice().filter((dataItem) => dataItem.offer.rooms == model[filter]) : data.slice();
+const getHousingRooms = (filter, data) => model[filter] !== 'any' ? data.slice().filter((dataItem) => dataItem.offer.rooms === model[filter] * 1) : data.slice();
 
-const getHousingGuests = (filter, data) => model[filter] !== 'any' ? data.slice().filter((dataItem) => dataItem.offer.guests == model[filter]) : data.slice();
+const getHousingGuests = (filter, data) => model[filter] !== 'any' ? data.slice().filter((dataItem) => dataItem.offer.guests === model[filter] * 1) : data.slice();
 
 const getPriceHousing = (filter, data) => {
   switch (model[filter]) {
@@ -63,6 +63,24 @@ formFilters.addEventListener('change', debounce((evt) => {
   console.log(filterPoints());
   createMarkerAdvertisment(filterPoints().slice(0, MAX_FILTERS));
 }, 500));
+
+const resetModel = () => {
+  Object.keys(model).forEach((item) => {
+    console.log('item ', item);
+    if(item === 'features') {
+      model[item].length = 0;
+    } else {
+      model[item] = 'any';
+    };
+  });
+};
+
+formFilters.addEventListener('reset', () => {
+  resetModel();
+  console.log(model);
+  markerGroup.clearLayers();
+  createMarkerAdvertisment(filterPoints().slice(0, MAX_FILTERS));
+});
 
 const setFilters = (data) => {
   points.push(...data.slice());
