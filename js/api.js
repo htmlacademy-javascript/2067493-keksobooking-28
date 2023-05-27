@@ -1,4 +1,5 @@
-import { GET_URL } from './constains.js';
+
+import { GET_URL, POST_URL } from './constains.js';
 
 const getData = () =>
   fetch(GET_URL)
@@ -10,4 +11,13 @@ const getData = () =>
       }
     });
 
-export { getData };
+
+
+const postData = (body) =>
+  fetch(POST_URL, {
+    method: 'post',
+    body
+  });
+
+export { getData, postData };
+
