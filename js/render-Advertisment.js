@@ -55,6 +55,7 @@ const renderAdvertisment = ({ offer, author}) => {
     });
   }
 
+
   //Добавляем фотографии в шаблон в случае если они есть
   if(Object.hasOwn(offer, 'photos')){
     offer.photos.forEach((photo) => {
@@ -63,6 +64,7 @@ const renderAdvertisment = ({ offer, author}) => {
       templatePhotos.append(cratePhoto);
     });
   }
+
 
   //Добавлем фотографию аватарки автора
   advertismentTemplate.querySelector('.popup__avatar').src = author.avatar;
