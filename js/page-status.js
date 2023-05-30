@@ -1,3 +1,4 @@
+//=============================== АКТИВНОЕ СОСТОЯНИЕ =======================================
 const getActiveStateTag = (data, tag) => {
   const tagForm = data.querySelectorAll(tag);
   tagForm.forEach((tagFormItem) => {
@@ -5,7 +6,6 @@ const getActiveStateTag = (data, tag) => {
   });
   return tagForm;
 };
-
 const getActiveState = (data) => {
   const arrayClassData = data.classList.value.split(' ');
   data.classList.remove(arrayClassData[1]);
@@ -15,6 +15,7 @@ const getActiveState = (data) => {
   return data;
 };
 
+//========================== НЕ АТИВНОЕ СОСТОЯНИЕ ===========================================
 const getInactiveStateTag = (data, tag) => {
   const tagForm = data.querySelectorAll(tag);
   tagForm.forEach((tagFormItem) => {
@@ -22,7 +23,6 @@ const getInactiveStateTag = (data, tag) => {
   });
   return tagForm;
 };
-
 const getInactiveState = (data) => {
   data.classList.add(`${data.classList.value}--disabled`);
   getInactiveStateTag(data, 'input');

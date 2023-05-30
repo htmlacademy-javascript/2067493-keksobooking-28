@@ -1,5 +1,6 @@
-//=======================Модуль для валидции формы=========================================
 import { markerUser } from './rendering-map.js';
+import { CITY_CENTER } from './constains.js';
+import { sliderElement } from './slider.js';
 const adForm = document.querySelector('.ad-form');
 const titleForm = adForm.querySelector('#title');
 const priceForm = adForm.querySelector('#price');
@@ -21,6 +22,7 @@ pristine.addValidator(
 );
 
 //--------------------------------Валидация цены--------------------------------------------
+priceForm.setAttribute('value', `${sliderElement.noUiSlider.get()}`);
 const typeForm = adForm.querySelector('#type');
 const minPrice = {
   'bungalow': 0,
@@ -52,7 +54,7 @@ typeForm.addEventListener('change', () => {
 //----------------------------------Валидация адреса-------------------------------------
 const addresForm = adForm.querySelector('#address');
 addresForm.readOnly = true;
-addresForm.value = '35.6895, 139.692';
+addresForm.setAttribute('value', `${CITY_CENTER.lat}, ${CITY_CENTER.lng}`);
 markerUser.on('moveend', (evt) => {
   const coordinates = evt.target.getLatLng();
   addresForm.value = `${coordinates.lat.toFixed(5)}, ${coordinates.lng.toFixed(5)}`;
@@ -106,6 +108,16 @@ roomPhotoForm.addEventListener('change', () => {
   imageRoomPreview.src = URL.createObjectURL(imageRoom);
 });
 
+//-------------------- Возвращение значений По Умолчанию-----------------------------
+const getDefaultForm = () => {
+  markerUser.setLatLng(CITY_CENTER);
+  sliderElement.noUiSlider.updateOptions({
+    start: 30000});
+  imageAvatarPreview.src = 'img/muffin-grey.svg';
+  imageRoomPreview.src = 'img/muffin-red.svg';
+};
+
 //-----------------Проверка валидации формы при отпраки---------------
 const isValid = () => pristine.validate();
-export {isValid};
+
+export {isValid, getDefaultForm};
