@@ -1,10 +1,6 @@
-//Находим контент шаблона #card
 const pattern = document.querySelector('#card').content
   .querySelector('.popup');
-//Находим контейнер куда будут помещаться все элементы
 const container = document.querySelector('#map-canvas');
-
-//Функция для проверки типа здания
 const checkType = (obj) => {
   switch (obj) {
     case 'flat':
@@ -20,7 +16,7 @@ const checkType = (obj) => {
   }
 };
 
-//Функция добавления эелементов на страницу
+//================================ ДОБАВЛЕНИЕ ЭЛЕМЕНТОВ НА СТРАНИЦУ ===============================
 const renderAdvertisment = ({ offer, author}) => {
   //Клонируем шаблон
   const advertismentTemplate = pattern.cloneNode(true);
@@ -73,6 +69,5 @@ const renderAdvertisment = ({ offer, author}) => {
   return advertismentTemplate;
 };
 
-//Экспортиуем необходимые данные
 export { renderAdvertisment, container };
 

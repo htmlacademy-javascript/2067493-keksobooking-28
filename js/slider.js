@@ -1,7 +1,7 @@
 const sliderElement = document.querySelector('.ad-form__slider');
 const valueElement = document.querySelector('#price');
-const typeAdForm = document.querySelector('#type');
-const slider = noUiSlider.create(sliderElement, {
+const typeForm = document.querySelector('#type');
+noUiSlider.create(sliderElement, {
   range: {
     min: 1000,
     max: 100000
@@ -21,7 +21,9 @@ const slider = noUiSlider.create(sliderElement, {
 
 valueElement.addEventListener('change', () => sliderElement.noUiSlider.set(valueElement.value));
 
-sliderElement.noUiSlider.on('update', () => valueElement.value = sliderElement.noUiSlider.get());
+sliderElement.noUiSlider.on('update', () => {
+  valueElement.value = sliderElement.noUiSlider.get();
+});
 
 const minPrice = {
   'bungalow': 0,
@@ -31,13 +33,13 @@ const minPrice = {
   'palace': 10000,
 };
 
-typeAdForm.addEventListener('change', () => {
+typeForm.addEventListener('change', () => {
   sliderElement.noUiSlider.updateOptions({
     range: {
-      min: minPrice[typeAdForm.value],
+      min: minPrice[typeForm.value],
       max: 100000
     },
   });
 });
 
-export { slider };
+export { sliderElement };

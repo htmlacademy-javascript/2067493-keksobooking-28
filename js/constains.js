@@ -28,5 +28,5 @@ const ICON_MARKER_ADVERTISMENT = L.icon({
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
-//Экспортируем данные
+
 export {GET_URL, adForm, filtersForm, TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER, POST_URL, MAX_FILTERS };

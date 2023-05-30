@@ -1,47 +1,44 @@
-import { adForm } from './constains.js';
-import { isValid } from './validation.js';
+import { adForm, filtersForm} from './constains.js';
+import { isValid, getDefaultForm } from './validation.js';
 import { postData } from './api.js';
-import { showSuccessPopup } from './popups.js';
-import { setFilters } from './filters.js';
-const formFilters = document.querySelector('.map__filters');
-const resetButton = adForm.querySelector('.ad-form__reset');
-const resetFilter = () => {
-  formFilters.reset();
-};
-
-resetButton.addEventListener('click', () => {
-  resetFilter();
-});
+import { showSuccessPopup, showErrorPopup } from './popups.js';
 
 const submitForm = adForm.querySelector('.ad-form__submit');
-adForm.addEventListener('submit', (evt) => {
-  console.log('Кнопка нажата');
-  evt.preventDefault();
-  console.log(isValid);
-  if (isValid) {
-    console.log('Форма валидна');
-    submitForm.disabled = true;
-    postData(new FormData(evt.target))
-      .then((response) => {
-        if (response.ok) {
-          console.log('успешно');
-          // Очистить форму
-          // Очистить фильтры
-          // Показать сообщение об успешной отправке формы
-          showSuccessPopup();
-        } else {
-          console.log('Ошибка');
-        }
 
-      })
-      .catch()
-      .finally(() => {
-        //Разблокировать кнопку
-        submitForm.disabled = false;
-      });
-  }
-});
-const setForm = () => {
-  console.log('setForm');
+//-------------------Сброс при нажатие "очистить"--------------------
+const resetFilter = () => {
+  filtersForm.reset();
 };
-export { setForm };
+const setUserFormReset = () => {
+  adForm.addEventListener('reset', () => {
+    getDefaultForm();
+    resetFilter();
+  });
+};
+
+//---------------------Отправка формы на сервер------------------------
+const setUserFormSubmit = () => {
+  adForm.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+    if (isValid()) {
+      submitForm.disabled = true;
+      postData(new FormData(evt.target))
+        .then((response) => {
+          if (response.ok) {
+            adForm.reset();
+            getDefaultForm();
+            resetFilter();
+            showSuccessPopup();
+          } else {
+            showErrorPopup();
+          }
+        })
+        .catch(() => showErrorPopup())
+        .finally(() => {
+          submitForm.disabled = false;
+        });
+    }
+  });
+};
+
+export { setUserFormSubmit, setUserFormReset };

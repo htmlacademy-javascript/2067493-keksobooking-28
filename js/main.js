@@ -1,35 +1,26 @@
 import { getData } from './api.js';
+import { showMessageErrorDate } from './popups.js';
 import { loadMap, markerUser, map} from './rendering-map.js';
 import { getInactiveState, getActiveState } from './page-status.js';
 import { adForm, filtersForm } from './constains.js';
-import { slider } from './slider.js';
-import { setForm } from './form.js';
+import { setUserFormReset, setUserFormSubmit } from './form.js';
 import { setFilters} from './filters.js';
-//Задаем странице не активное состояние
+
+//=============================== НЕ АКТИВНОЕ СОСТОЯНИЕ СТРАНИЦЫ=========================================
 getInactiveState(adForm);
 getInactiveState(filtersForm);
-//Загружаем карту
-console.log('Неактивное состояние страницы');
-loadMap()
-  .then(() => getActiveState(adForm))
+
+//============================== ЗАГРУЗКА ДАННЫХ =====================================================
+loadMap(getActiveState(adForm))
   .then(() => markerUser.addTo(map))
-  .then(() => {
-    setForm();
-  })
+  .then(() => setUserFormReset())
+  .then(() => setUserFormSubmit())
   .then(() => {
     getData()
-      .then((data) => {
-        setFilters(data);
-      })
-      .then(() => {
-        getActiveState(filtersForm);
-      })
-      .catch(() => {
-        console.log('Данные не загружены');
-      });
+      .then((data) => setFilters(data))
+      .then(() => getActiveState(filtersForm))
+      .catch(() => showMessageErrorDate ('Произошла ошибка загрузки данных'));
   })
-  .catch(() => {
-    console.log('Карта не загружена');
-  });
+  .catch(() => showMessageErrorDate ('Произошла ошибка загрузки карты'));
 
 

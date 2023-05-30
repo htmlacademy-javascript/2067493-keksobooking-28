@@ -1,4 +1,6 @@
 import { GET_URL, POST_URL } from './constains.js';
+
+//---------------------Получение данных с сервера---------------------
 const getData = () =>
   fetch(GET_URL)
     .then((response) => {
@@ -9,7 +11,7 @@ const getData = () =>
       }
     });
 
-
+//-----------------Настройки отправки данных на сервер-------------------
 const postData = (body) =>
   fetch(POST_URL, {
     method: 'post',
