@@ -31,4 +31,3 @@ loadMap()
   .catch(() => showMessageErrorDate('Произошла ошибка загрузки карты'));
 
 
-

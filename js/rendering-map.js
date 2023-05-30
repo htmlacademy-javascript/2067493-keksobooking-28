@@ -1,3 +1,4 @@
+
 import {ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER } from './constains.js';
 import { renderAdvertisment } from './render-Advertisment.js';
 
@@ -9,6 +10,7 @@ const loadMap = () => new Promise((resolve, reject) => {
     resolve(true);
   }).setView(CITY_CENTER, ZOOM);
   reject(false);
+
 });
 
 //=============================Маркер для объявлений=========================================
