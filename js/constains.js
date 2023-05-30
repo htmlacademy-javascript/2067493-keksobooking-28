@@ -1,3 +1,4 @@
+
 //Сылка получения данных с сервера
 const GET_URL = 'https://28.javascript.pages.academy/keksobooking/data';
 //Ссылка отправки данных
@@ -30,3 +31,4 @@ const ICON_MARKER_ADVERTISMENT = L.icon({
 });
 
 export {GET_URL, adForm, filtersForm, TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER, POST_URL, MAX_FILTERS };
+

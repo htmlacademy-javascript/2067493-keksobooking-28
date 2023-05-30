@@ -1,3 +1,4 @@
+
 import { GET_URL, POST_URL } from './constains.js';
 
 //---------------------Получение данных с сервера---------------------
@@ -19,3 +20,4 @@ const postData = (body) =>
   });
 
 export { getData, postData };
+

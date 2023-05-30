@@ -1,3 +1,4 @@
+
 import { getData } from './api.js';
 import { showMessageErrorDate } from './popups.js';
 import { loadMap, markerUser, map } from './rendering-map.js';
@@ -28,5 +29,6 @@ loadMap()
       .catch(() => showMessageErrorDate('Произошла ошибка загрузки данных'));
   })
   .catch(() => showMessageErrorDate('Произошла ошибка загрузки карты'));
+
 
 
