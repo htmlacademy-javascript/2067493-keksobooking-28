@@ -1,16 +1,14 @@
-import { TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER } from './constains.js';
+import {ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER } from './constains.js';
 import { renderAdvertisment } from './render-Advertisment.js';
 
 //================================Создаем карту===============================================
 const map = L.map('map-canvas');
 const markerGroup = L.layerGroup().addTo(map);
-const loadMap = () => new Promise((resolve) => {
+const loadMap = () => new Promise((resolve, reject) => {
   map.on('load', () => {
-    resolve();
+    resolve(true);
   }).setView(CITY_CENTER, ZOOM);
-  L.tileLayer(TILE_LAYER, {
-    attribution: COPYRIGHT
-  }).addTo(map);
+  reject(false);
 });
 
 //=============================Маркер для объявлений=========================================
