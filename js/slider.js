@@ -1,3 +1,11 @@
+const minPrice = {
+  'bungalow': 0,
+  'flat': 1000,
+  'hotel': 3000,
+  'house': 5000,
+  'palace': 10000,
+};
+
 const sliderElement = document.querySelector('.ad-form__slider');
 const valueElement = document.querySelector('#price');
 const typeForm = document.querySelector('#type');
@@ -24,14 +32,6 @@ valueElement.addEventListener('change', () => sliderElement.noUiSlider.set(value
 sliderElement.noUiSlider.on('update', () => {
   valueElement.value = sliderElement.noUiSlider.get();
 });
-
-const minPrice = {
-  'bungalow': 0,
-  'flat': 1000,
-  'hotel': 3000,
-  'house': 5000,
-  'palace': 10000,
-};
 
 typeForm.addEventListener('change', () => {
   sliderElement.noUiSlider.updateOptions({

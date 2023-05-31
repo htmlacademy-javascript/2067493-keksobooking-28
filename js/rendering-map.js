@@ -1,6 +1,5 @@
-
-import {ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER } from './constains.js';
-import { renderAdvertisment } from './render-Advertisment.js';
+import {ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER } from './constants.js';
+import { renderAdvertisment } from './rendering-advertisment.js';
 
 //================================Создаем карту===============================================
 const map = L.map('map-canvas');

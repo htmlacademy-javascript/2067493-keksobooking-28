@@ -72,4 +72,3 @@ const renderAdvertisment = ({ offer, author}) => {
 };
 
 export { renderAdvertisment, container };
-

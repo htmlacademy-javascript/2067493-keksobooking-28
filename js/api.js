@@ -1,5 +1,5 @@
 
-import { GET_URL, POST_URL } from './constains.js';
+import { GET_URL, POST_URL } from './constants.js';
 
 //---------------------Получение данных с сервера---------------------
 const getData = () =>
@@ -20,4 +20,3 @@ const postData = (body) =>
   });
 
 export { getData, postData };
-
