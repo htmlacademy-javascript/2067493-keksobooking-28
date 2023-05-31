@@ -3,10 +3,6 @@
 const GET_URL = 'https://28.javascript.pages.academy/keksobooking/data';
 //Ссылка отправки данных
 const POST_URL = 'https://28.javascript.pages.academy/keksobooking';
-//Находим форму для заполнения и отправки данных на сервера
-const adForm = document.querySelector('.ad-form');
-//Находим фильтры
-const filtersForm = document.querySelector('.map__filters');
 //Настройкий лефлета по умолчанию
 const MAX_FILTERS = 10;
 const TILE_LAYER = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
@@ -29,6 +25,9 @@ const ICON_MARKER_ADVERTISMENT = L.icon({
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
+//Находим форму для заполнения и отправки данных на сервера
+const adForm = document.querySelector('.ad-form');
+//Находим фильтры
+const filtersForm = document.querySelector('.map__filters');
 
 export {GET_URL, adForm, filtersForm, TILE_LAYER, COPYRIGHT, ZOOM, CITY_CENTER, ICON_MARKER_ADVERTISMENT, ICON_MARKER_USER, POST_URL, MAX_FILTERS };
-

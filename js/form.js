@@ -1,4 +1,4 @@
-import { adForm, filtersForm} from './constains.js';
+import { adForm, filtersForm} from './constants.js';
 import { isValid, getDefaultForm } from './validation.js';
 import { postData } from './api.js';
 import { showSuccessPopup, showErrorPopup } from './popups.js';

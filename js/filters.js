@@ -1,5 +1,5 @@
 import { createMarkerAdvertisment, markerGroup } from './rendering-map.js';
-import { MAX_FILTERS } from './constains.js';
+import { MAX_FILTERS } from './constants.js';
 import { debounce } from './utils.js';
 const formFilters = document.querySelector('.map__filters');
 const points = [];

@@ -3,7 +3,7 @@ import { getData } from './api.js';
 import { showMessageErrorDate } from './popups.js';
 import { loadMap, markerUser, map } from './rendering-map.js';
 import { getInactiveState, getActiveState } from './page-status.js';
-import { adForm, filtersForm, TILE_LAYER, COPYRIGHT } from './constains.js';
+import { adForm, filtersForm, TILE_LAYER, COPYRIGHT } from './constants.js';
 import { setUserFormReset, setUserFormSubmit } from './form.js';
 import { setFilters } from './filters.js';
 
@@ -29,5 +29,3 @@ loadMap()
       .catch(() => showMessageErrorDate('Произошла ошибка загрузки данных'));
   })
   .catch(() => showMessageErrorDate('Произошла ошибка загрузки карты'));
-
-

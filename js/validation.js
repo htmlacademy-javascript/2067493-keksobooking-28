@@ -1,6 +1,19 @@
 import { markerUser } from './rendering-map.js';
-import { CITY_CENTER } from './constains.js';
+import { CITY_CENTER } from './constants.js';
 import { sliderElement } from './slider.js';
+const minPrice = {
+  'bungalow': 0,
+  'flat': 1000,
+  'hotel': 3000,
+  'house': 5000,
+  'palace': 10000,
+};
+const quantityRoom = {
+  '100': ['0'],
+  '1': ['1'],
+  '2': ['1', '2'],
+  '3': ['1', '2', '3']
+};
 const adForm = document.querySelector('.ad-form');
 const titleForm = adForm.querySelector('#title');
 const priceForm = adForm.querySelector('#price');
@@ -24,15 +37,8 @@ pristine.addValidator(
 //--------------------------------Валидация цены--------------------------------------------
 priceForm.setAttribute('value', `${sliderElement.noUiSlider.get()}`);
 const typeForm = adForm.querySelector('#type');
-const minPrice = {
-  'bungalow': 0,
-  'flat': 1000,
-  'hotel': 3000,
-  'house': 5000,
-  'palace': 10000,
-};
 const validatePriceForm = (value) => value >= minPrice[typeForm.value] && value <= 100000;
-const messageValidatePriceForm = (value) => {
+const createMessageValidatePriceForm = (value) => {
   if (value < minPrice[typeForm.value]) {
     return `Минимум ${minPrice[typeForm.value]}`;
   } else if (value > 100000) {
@@ -42,7 +48,7 @@ const messageValidatePriceForm = (value) => {
 pristine.addValidator(
   priceForm,
   validatePriceForm,
-  messageValidatePriceForm
+  createMessageValidatePriceForm
 );
 
 //------------------Проверка валидности цены при измение типа жилья----------------------
@@ -73,16 +79,10 @@ timeoutForm.addEventListener('change', () => {
 //------------------------Валидация количества гостей----------------------------------
 const roomForm = adForm.querySelector('#room_number');
 const capacityForm = adForm.querySelector('#capacity');
-const quantityRoom = {
-  '100': ['0'],
-  '1': ['1'],
-  '2': ['1', '2'],
-  '3': ['1', '2', '3']
-};
-const capapasityOption = () => quantityRoom[roomForm.value].includes(capacityForm.value);
+const validateCapacityForm = () => quantityRoom[roomForm.value].includes(capacityForm.value);
 pristine.addValidator(
   capacityForm,
-  capapasityOption,
+  validateCapacityForm,
   'Не подходит количетсво гостей'
 );
 roomForm.addEventListener('change', () => pristine.validate(capacityForm));
